@@ -12,7 +12,7 @@ private:
 	Puntero<NodoAVL<T>> _root;
 public:
 	/**** Constructoras ****/
-	AVLImp(){
+	AVLImp<T>(){
 		_root = NULL;
 	};
 	// construye el AVL vacío

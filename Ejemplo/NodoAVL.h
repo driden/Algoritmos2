@@ -17,7 +17,7 @@ private:
 public:
 	
 	//Getters
-	T& GetDato() const;
+	const T& GetDato() const;
 	Puntero<NodoAVL<T>> GetIzq() const;
 	Puntero<NodoAVL<T>> GetDer() const;
 	Puntero<Comparador<T>> GetComparador() const;

@@ -4,8 +4,8 @@
 
 //Getters
 template <class T>
-T& NodoAVL<T>::GetDato() const{
-	return new Puntero(_dato);
+const T& NodoAVL<T>::GetDato() const{
+	return _dato;
 }
 template <class T>
 Puntero<NodoAVL<T>> NodoAVL<T>::GetIzq() const{

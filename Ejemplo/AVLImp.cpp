@@ -103,7 +103,10 @@ void AVLImp<T> ::RotacionDobleDer(Puntero <NodoAVL<T>> &root)
 	RotacionSimpleIzq(root->GetDer());
 	RotacionSimpleIzq(root);
 }
-
+template<class T>
+int AVLImp<T>::GetHeight(Puntero<NodoAVL<T>> nodo) const{
+	return nodo->GetHeight();
+}
 
 /**** Predicado ****/
 // retorna true si el árbol es vacío
@@ -114,7 +117,7 @@ bool AVLImp<T>::EsVacio() const{
 
 template<class T>
 const T& AVLImp<T>::Raiz() const{
-	return _root;
+	return _root->GetDato();
 }
 
 template<class T>
