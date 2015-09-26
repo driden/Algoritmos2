@@ -1,0 +1,26 @@
+﻿Build started 20/09/2015 13:22:07.
+     1>Project "C:\Users\Nacho\Dropbox\ORT\Algoritmos 2\Practico\Ejemplo\Ejemplo.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I..\Framework /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt AVLImp.cpp NodoAVL.cpp main.cpp
+         main.cpp
+     1>c:\users\nacho\dropbox\ort\algoritmos 2\practico\ejemplo\avlimp.cpp(119): error C2244: 'AVLImp<T>::Raiz' : unable to match function definition to an existing declaration
+                 c:\users\nacho\dropbox\ort\algoritmos 2\practico\ejemplo\avlimp.h(30) : see declaration of 'AVLImp<T>::Raiz'
+                 definition
+                 'T AVLImp<T>::Raiz(void)'
+                 existing declarations
+                 'const T &AVLImp<T>::Raiz(void) const'
+         AVLImp.cpp
+     1>c:\users\nacho\dropbox\ort\algoritmos 2\practico\ejemplo\avlimp.cpp(119): error C2244: 'AVLImp<T>::Raiz' : unable to match function definition to an existing declaration
+                 c:\users\nacho\dropbox\ort\algoritmos 2\practico\ejemplo\avlimp.h(30) : see declaration of 'AVLImp<T>::Raiz'
+                 definition
+                 'T AVLImp<T>::Raiz(void)'
+                 existing declarations
+                 'const T &AVLImp<T>::Raiz(void) const'
+         Generating Code...
+         Skipping... (no relevant changes detected)
+         NodoAVL.cpp
+     1>Done Building Project "C:\Users\Nacho\Dropbox\ORT\Algoritmos 2\Practico\Ejemplo\Ejemplo.vcxproj" (Build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:00.95
