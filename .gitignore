@@ -17,10 +17,8 @@ Thumbs.db
 *.exe
 *.sdf
 *.pdb
-*.vcxproj
-*.filters
-*.user
 *.suo
+*.user
 [Bb]in
 [Dd]ebug*/
 *.sbr
