@@ -38,5 +38,7 @@ public:
 	/* pre : el elemento está presente en el árbol
      * post: retorna el elemento */
 	virtual const T& Recuperar(const T&) const abstract;
+
+	virtual void Imprimir() abstract;
 };
 #endif

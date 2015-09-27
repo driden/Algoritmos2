@@ -2,23 +2,29 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="AVLImp.cpp">
+      <Filter>TADs\AVL</Filter>
+    </ClCompile>
     <ClCompile Include="NodoAVL.cpp">
-      <Filter>TADs\Source</Filter>
+      <Filter>TADs\AVL</Filter>
     </ClCompile>
     <ClCompile Include="ComparadorInt.cpp">
-      <Filter>TADs\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="AVLImp.cpp">
-      <Filter>TADs\Source</Filter>
+      <Filter>TADs\Comparadores</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NodoAVL.h">
-      <Filter>TADs</Filter>
+    <ClInclude Include="AVL.h">
+      <Filter>TADs\AVL</Filter>
     </ClInclude>
-    <ClInclude Include="AVL.h" />
-    <ClInclude Include="AVLImp.h" />
-    <ClInclude Include="ComparadorInt.h" />
+    <ClInclude Include="AVLImp.h">
+      <Filter>TADs\AVL</Filter>
+    </ClInclude>
+    <ClInclude Include="NodoAVL.h">
+      <Filter>TADs\AVL</Filter>
+    </ClInclude>
+    <ClInclude Include="ComparadorInt.h">
+      <Filter>TADs\Comparadores</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="TADs">
@@ -33,8 +39,11 @@
     <Filter Include="TADs\Set\NoAcotado">
       <UniqueIdentifier>{64b63581-1a5d-46cd-9945-ae00aa747ff7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TADs\Source">
-      <UniqueIdentifier>{d3a8e23f-e34b-43b7-97d2-65d40535d544}</UniqueIdentifier>
+    <Filter Include="TADs\AVL">
+      <UniqueIdentifier>{2f36fdde-9cb7-452d-9815-236dcb0b58fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TADs\Comparadores">
+      <UniqueIdentifier>{f7597d34-e193-4518-b9c7-194aa0c46405}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

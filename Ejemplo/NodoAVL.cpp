@@ -8,16 +8,12 @@ const T& NodoAVL<T>::GetDato() const{
 	return _dato;
 }
 template <class T>
-Puntero<NodoAVL<T>> NodoAVL<T>::GetIzq() const{
+Puntero<NodoAVL<T>> NodoAVL<T>::GetIzq(){
 	return _izq;
 }
 template <class T>
-Puntero<NodoAVL<T>> NodoAVL<T>::GetDer() const{
+Puntero<NodoAVL<T>> NodoAVL<T>::GetDer(){
 	return _der;
-}
-template <class T>
-Puntero<Comparador<T>> NodoAVL<T>::GetComparador() const{
-	return _comparador;
 }
 template <class T>
 int NodoAVL<T>::GetHeight() const{
@@ -41,9 +37,4 @@ template <class T>
 void NodoAVL<T>::SetDer(const Puntero<NodoAVL<T>> &der){
 	_der = der;
 }
-template <class T>
-void NodoAVL<T>::SetComparador(const Puntero<Comparador<T>> &cmp){
-	_comparador = cmp;
-}
-
 #endif // !NODOAVL_CPP

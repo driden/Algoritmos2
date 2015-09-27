@@ -5,7 +5,7 @@
 
 #include "Puntero.h"
 #include "avl.h"
-
+#include "ComparadorInt.h"
 
 void main()
 {
@@ -21,15 +21,19 @@ void main()
 	pares->Union(impares)->Diferencia(pares)->Imprimir();
 
 */
-	Puntero<AVL<int>> avl = new AVLImp<int>();
-	/*
+	Puntero<ComparadorInt> cmp = new ComparadorInt();
+	Puntero<AVL<int>> avl = new AVLImp<int>(cmp);
+
 	int x1 = 59;
 	int x2 = 5;
 
 	avl->Insertar(x1);
+	cout << "se agrego x1" << endl;
 	avl->Insertar(x2);
+	cout << "se agrego x2" << endl;
 	avl->Insertar(9);
-	avl->Insertar(19);*/
-
+	avl->Insertar(19);
+	
+	avl->Imprimir();
 	//avl->Borrar(x1);
 }

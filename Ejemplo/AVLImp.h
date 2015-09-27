@@ -10,11 +10,16 @@ class AVLImp : public AVL<T>
 {
 private:
 	Puntero<NodoAVL<T>> _root;
+	Puntero<Comparador<T>> _comparador;
 public:
 	/**** Constructoras ****/
 	AVLImp<T>(){
 		_root = NULL;
 	};
+	AVLImp<T>(const Puntero<Comparador<T>> cmp){
+		_root = NULL;
+		_comparador = cmp;
+	}
 	// construye el AVL vacío
 	void Vacio();
 	/* construye un AVL con x insertado en la posición correcta */
@@ -49,6 +54,11 @@ public:
 	void RotacionDobleIzq(Puntero <NodoAVL<T>> &root);
 	void RotacionDobleDer(Puntero <NodoAVL<T>> &root);
 	int GetHeight(Puntero<NodoAVL<T>> nodo) const;
+
+	void SetComparador(const Puntero<Comparador<T>> &cmp);
+	Puntero<Comparador<T>> GetComparador() const;
+	virtual void Imprimir();
+	void postorder(Puntero<NodoAVL<T>> p, int indent = 0);
 };
 #include "AVLImp.cpp"
 #endif
