@@ -50,12 +50,8 @@ void AVLImp<T> ::Insertar(const T &x, const Puntero<Comparador<T>> &cmp, Puntero
 			}
 			else
 			{
-				RotacionSimpleDer(root);
+				RotacionDobleIzq(root);
 			}
-		}
-		else
-		{
-			RotacionDobleIzq(root);
 		}
 	}
 	else if (cmp->EsMayor(x, root->GetDato()))
@@ -69,14 +65,9 @@ void AVLImp<T> ::Insertar(const T &x, const Puntero<Comparador<T>> &cmp, Puntero
 			}
 			else
 			{
-				RotacionSimpleIzq(root);
+				RotacionDobleDer(root);
 			}
 		}
-		else
-		{
-			RotacionDobleDer(root);
-		}
-
 	}
 	root->SetHeight(max(GetHeight(root->GetDer()), GetHeight(root->GetIzq())) + 1);
 }
@@ -86,10 +77,16 @@ void AVLImp<T> ::RotacionSimpleIzq(Puntero<NodoAVL<T>> &root)
 {
 	if (root != NULL){
 		Puntero<NodoAVL<T>>  k1 = root->GetIzq();
-		root->GetIzq() = k1->GetDer();
-		k1->GetDer() = root;
-		root->SetHeight(max(GetHeight(root->GetIzq()), GetHeight(root->GetDer())) + 1);
-		k1->SetHeight(max(GetHeight(k1->GetIzq()), GetHeight(k1->GetDer())) + 1);
+		if (k1 != NULL)
+		{
+			root->GetIzq() = k1->GetDer();
+			k1->GetDer() = root;
+			root->SetHeight(max(GetHeight(root->GetIzq()), GetHeight(root->GetDer())) + 1);
+			k1->SetHeight(max(GetHeight(k1->GetIzq()), GetHeight(k1->GetDer())) + 1);
+			//faltaba terminar de enganchar el arbol!
+			root = k1;
+			
+		}
 	}
 }
 
@@ -98,10 +95,14 @@ void AVLImp<T> ::RotacionSimpleDer(Puntero<NodoAVL<T>> &root)
 {
 	if (root != NULL){
 		Puntero<NodoAVL<T>> k2 = root->GetDer();
-		root->GetDer() = k2->GetIzq();
-		k2->GetIzq() = root;
-		k2->SetHeight(max(GetHeight(k2->GetIzq()), GetHeight(k2->GetDer())) + 1);
-		root->SetHeight(max(GetHeight(root->GetIzq()), GetHeight(root->GetDer())) + 1);
+		if (k2 != NULL){
+			root->GetDer() = k2->GetIzq();
+			k2->GetIzq() = root;
+			root->SetHeight(max(GetHeight(root->GetIzq()), GetHeight(root->GetDer())) + 1);
+			k2->SetHeight(max(GetHeight(k2->GetIzq()), GetHeight(k2->GetDer())) + 1);
+			//faltaba terminar de enganchar el arbol!
+			root = k2;
+		}
 	}
 }
 
@@ -116,11 +117,11 @@ template<class T>
 void AVLImp<T> ::RotacionDobleDer(Puntero <NodoAVL<T>> &root)
 {
 	RotacionSimpleIzq(root->GetDer());
-	RotacionSimpleIzq(root);
+	RotacionSimpleDer(root);
 }
 template<class T>
 int AVLImp<T>::GetHeight(Puntero<NodoAVL<T>> nodo) const{
-	return (nodo == NULL) ? 0 : nodo->GetHeight();
+	return (nodo == NULL) ? -1 : nodo->GetHeight();
 }
 
 template <class T>

@@ -8,11 +8,11 @@ const T& NodoAVL<T>::GetDato() const{
 	return _dato;
 }
 template <class T>
-Puntero<NodoAVL<T>> NodoAVL<T>::GetIzq(){
+Puntero<NodoAVL<T>>& NodoAVL<T>::GetIzq(){
 	return _izq;
 }
 template <class T>
-Puntero<NodoAVL<T>> NodoAVL<T>::GetDer(){
+Puntero<NodoAVL<T>>& NodoAVL<T>::GetDer(){
 	return _der;
 }
 template <class T>

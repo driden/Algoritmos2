@@ -17,8 +17,8 @@ public:
 
 	//Getters
 	const T& GetDato() const;
-	Puntero<NodoAVL<T>> GetIzq();
-	Puntero<NodoAVL<T>> GetDer();
+	Puntero<NodoAVL<T>>& GetIzq();
+	Puntero<NodoAVL<T>>& GetDer();
 	int GetHeight() const;
 
 	//Setters
