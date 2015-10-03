@@ -24,7 +24,7 @@ void main()
 	Puntero<ComparadorInt> cmp = new ComparadorInt();
 	Puntero<AVL<int>> avl = new AVLImp<int>(cmp);
 
-	int x1 = 59;
+	/*int x1 = 59;
 	int x2 = 5;
 
 	avl->Insertar(x1);
@@ -32,9 +32,31 @@ void main()
 	avl->Insertar(x2);
 	cout << "se agrego x2" << endl;
 	avl->Insertar(9);
-	avl->Insertar(19);
+	avl->Insertar(19);*/
 	
-	avl->Imprimir();
-	cout << avl->Maximo() << endl;
+	
+	/*cout << "Maximo: "<<avl->Maximo() << endl;
+	cout << "Minimo: " << avl->Minimo() << endl;
+	cout << "Existe 49: " << avl->Existe(49) << endl;
+	cout << "Existe 59: " << avl->Existe(59) << endl;
+	cout << "Existe 5: " << avl->Existe(5) << endl;
+	cout << "Existe 15: " << avl->Existe(15) << endl;
+	cout << "Existe 19: " << avl->Existe(19) << endl;*/
 	//avl->Borrar(x1);
+
+	avl->Insertar(25);
+	avl->Insertar(40);
+	avl->Insertar(15);
+	avl->Insertar(20);
+	//Doble rotacion izq
+	avl->Insertar(19);
+	avl->Insertar(30);
+	avl->Insertar(45);
+	avl->Insertar(17);
+	avl->Insertar(27);
+	avl->Insertar(26);
+	
+
+
+	avl->Borrar(40);
 }

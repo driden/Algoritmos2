@@ -60,6 +60,12 @@ public:
 	virtual void Imprimir();
 	void postorder(Puntero<NodoAVL<T>> p, int indent = 0);
 	const T& Maximo(Puntero<NodoAVL<T>> root) const;
+	const T& Minimo(Puntero<NodoAVL<T>> root) const;
+
+	Puntero<NodoAVL<T>> NodoMaximo(Puntero<NodoAVL<T>> root);
+	Puntero<NodoAVL<T>> NodoMinimo(Puntero<NodoAVL<T>> root);
+	void Borrar(const T &x, Puntero<Comparador<T>> cmp, Puntero<NodoAVL<T>> &root);
+	bool Existe(const T &x, Puntero<Comparador<T>> cmp, Puntero<NodoAVL<T>> root) const;
 };
 #include "AVLImp.cpp"
 #endif

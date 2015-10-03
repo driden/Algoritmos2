@@ -57,9 +57,9 @@ void AVLImp<T> ::Insertar(const T &x, const Puntero<Comparador<T>> &cmp, Puntero
 	else if (cmp->EsMayor(x, root->GetDato()))
 	{
 		Insertar(x, cmp, root->GetDer());
-		if (GetHeight(root->GetIzq()) - GetHeight(root->GetDer()) == 2)
+		if (GetHeight(root->GetDer()) - GetHeight(root->GetIzq()) == 2)
 		{
-			if (cmp->EsMenor(x, root->GetDer()->GetDato()))
+			if (cmp->EsMayor(x, root->GetDer()->GetDato()))
 			{
 				RotacionSimpleDer(root);
 			}
@@ -79,13 +79,11 @@ void AVLImp<T> ::RotacionSimpleIzq(Puntero<NodoAVL<T>> &root)
 		Puntero<NodoAVL<T>>  k1 = root->GetIzq();
 		if (k1 != NULL)
 		{
-			root->GetIzq() = k1->GetDer();
-			k1->GetDer() = root;
+			root->SetIzq(k1->GetDer());
+			k1->SetDer(root);
 			root->SetHeight(max(GetHeight(root->GetIzq()), GetHeight(root->GetDer())) + 1);
-			k1->SetHeight(max(GetHeight(k1->GetIzq()), GetHeight(k1->GetDer())) + 1);
-			//faltaba terminar de enganchar el arbol!
+			k1->  SetHeight(max(GetHeight(k1->GetIzq()), GetHeight(root)) + 1);
 			root = k1;
-			
 		}
 	}
 }
@@ -96,11 +94,10 @@ void AVLImp<T> ::RotacionSimpleDer(Puntero<NodoAVL<T>> &root)
 	if (root != NULL){
 		Puntero<NodoAVL<T>> k2 = root->GetDer();
 		if (k2 != NULL){
-			root->GetDer() = k2->GetIzq();
-			k2->GetIzq() = root;
+			root->SetDer(k2->GetIzq());
+			k2->SetIzq(root);
 			root->SetHeight(max(GetHeight(root->GetIzq()), GetHeight(root->GetDer())) + 1);
-			k2->SetHeight(max(GetHeight(k2->GetIzq()), GetHeight(k2->GetDer())) + 1);
-			//faltaba terminar de enganchar el arbol!
+			k2->SetHeight(max(GetHeight(k2->GetDer()), GetHeight(root)) + 1);
 			root = k2;
 		}
 	}
@@ -150,24 +147,130 @@ const T& AVLImp<T>::Maximo() const {
 }
 template<class T>
 const T& AVLImp<T>::Maximo(Puntero<NodoAVL<T>> root) const{
-	
+
 	while (root->GetDer() != NULL){
 		root = root->GetDer();
 	}
 	return root->GetDato();
 }
+
 template<class T>
 const T& AVLImp<T>::Minimo() const{
-	return Raiz();
+	return Minimo(_root);
+}
+template<class T>
+const T& AVLImp<T>::Minimo(Puntero<NodoAVL<T>> root) const{
+
+	while (root->GetIzq() != NULL){
+		root = root->GetIzq();
+	}
+	return root->GetDato();
 }
 
 template<class T>
 bool AVLImp<T>::Existe(const T &x) const{
-	return true;
+	return Existe(x, _comparador, _root);
+}
+template<class T>
+bool AVLImp<T>::Existe(const T &x, Puntero<Comparador<T>> cmp, Puntero<NodoAVL<T>> root) const{
+	bool existe = false;
+
+	if (root != NULL){
+		existe = cmp->SonIguales(x, root->GetDato());
+		if (!existe){
+			existe = existe || Existe(x, cmp, root->GetDer());
+			existe = existe || Existe(x, cmp, root->GetIzq());
+		}
+	}
+
+	return existe;
 }
 
 template<class T>
-void AVLImp<T>::Borrar(const T &x){}
+void AVLImp<T>::Borrar(const T &x)
+{
+	Borrar(x,_comparador,_root);
+}
+
+template<class T>
+void AVLImp<T>::Borrar(const T &x, Puntero<Comparador<T>> cmp, Puntero<NodoAVL<T>> &root)
+{
+	if (!EsVacio()){
+		if (_comparador->SonIguales(root->GetDato(), x)){
+
+			//Si es hoja, lo borramos de la raiz.
+			if (root->GetDer() == NULL &&root->GetIzq() == NULL){
+				root = NULL;
+			}
+			// Si tiene el subarbol derecho no vacio..
+			else if (root->GetDer() != NULL && root->GetIzq() == NULL){
+				Puntero<NodoAVL<T>> aux = root->GetDer();
+				root = NULL;
+				root = NodoMinimo(aux);
+			}
+			// Si tiene el subarbol izquierdo no vacio...
+			else if (root->GetIzq() != NULL && root->GetDer() == NULL){
+				Puntero<NodoAVL<T>> aux = root->GetIzq();
+				root = NULL;
+				root = NodoMaximo(aux);
+			}
+			//Si tiene 2 subarboles no vacios, eliminamos el "mayor de los menores"
+			else if (root->GetDer() != NULL && root->GetIzq() != NULL){
+				Puntero<NodoAVL<T>> aux = NodoMaximo(root->GetIzq());
+				aux->SetDato(root->GetDato());
+				aux = NULL; // El framework lo borra solo, por eso no hacemos delete.
+			}
+		}
+		else if (cmp->EsMenor(x, root->GetDato())){
+			Borrar(x, cmp, root->GetIzq());
+			if (GetHeight(root->GetIzq()) - GetHeight(root->GetDer()) == 2)
+			{
+				if (cmp->EsMenor(x, root->GetIzq()->GetDato()))
+				{
+					RotacionSimpleIzq(root);
+				}
+				else
+				{
+					RotacionDobleIzq(root);
+				}
+			}
+		}
+		else{
+			Borrar(x, cmp, root->GetDer());
+			Insertar(x, cmp, root->GetDer());
+			if (GetHeight(root->GetDer()) - GetHeight(root->GetIzq()) == 2)
+			{
+				if (cmp->EsMayor(x, root->GetDer()->GetDato()))
+				{
+					RotacionSimpleDer(root);
+				}
+				else
+				{
+					RotacionDobleDer(root);
+				}
+			}
+		}
+		if (!EsVacio())
+			root->SetHeight(max(GetHeight(root->GetDer()), GetHeight(root->GetIzq())) + 1);
+	}
+}
+
+template<class T>
+Puntero<NodoAVL<T>> AVLImp<T>::NodoMaximo(Puntero<NodoAVL<T>> root) {
+
+	while (root->GetDer() != NULL){
+		root = root->GetDer();
+	}
+	return root;
+}
+template<class T>
+Puntero<NodoAVL<T>> AVLImp<T>::NodoMinimo(Puntero<NodoAVL<T>> root) {
+
+	while (root->GetIzq() != NULL){
+		root = root->GetIzq();
+	}
+	return root;
+}
 
 template<class T>
 const T& AVLImp<T>::Recuperar(const T&) const{
