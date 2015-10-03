@@ -59,4 +59,7 @@ void main()
 
 
 	avl->Borrar(40);
+	avl->Borrar(27);
+	avl->Borrar(26);
+	avl->Borrar(30);
 }

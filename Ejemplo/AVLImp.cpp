@@ -204,20 +204,20 @@ void AVLImp<T>::Borrar(const T &x, Puntero<Comparador<T>> cmp, Puntero<NodoAVL<T
 			}
 			// Si tiene el subarbol derecho no vacio..
 			else if (root->GetDer() != NULL && root->GetIzq() == NULL){
-				Puntero<NodoAVL<T>> aux = root->GetDer();
+				Puntero<NodoAVL<T>> aux = NodoMinimo(aux);
 				root = NULL;
-				root = NodoMinimo(aux);
+				root = aux;
 			}
 			// Si tiene el subarbol izquierdo no vacio...
 			else if (root->GetIzq() != NULL && root->GetDer() == NULL){
-				Puntero<NodoAVL<T>> aux = root->GetIzq();
+				Puntero<NodoAVL<T>> aux = NodoMaximo(root->GetIzq());
 				root = NULL;
-				root = NodoMaximo(aux);
+				root = aux;
 			}
 			//Si tiene 2 subarboles no vacios, eliminamos el "mayor de los menores"
 			else if (root->GetDer() != NULL && root->GetIzq() != NULL){
 				Puntero<NodoAVL<T>> aux = NodoMaximo(root->GetIzq());
-				aux->SetDato(root->GetDato());
+				root->SetDato(aux->GetDato());
 				aux = NULL; // El framework lo borra solo, por eso no hacemos delete.
 			}
 		}
@@ -237,7 +237,6 @@ void AVLImp<T>::Borrar(const T &x, Puntero<Comparador<T>> cmp, Puntero<NodoAVL<T
 		}
 		else{
 			Borrar(x, cmp, root->GetDer());
-			Insertar(x, cmp, root->GetDer());
 			if (GetHeight(root->GetDer()) - GetHeight(root->GetIzq()) == 2)
 			{
 				if (cmp->EsMayor(x, root->GetDer()->GetDato()))
