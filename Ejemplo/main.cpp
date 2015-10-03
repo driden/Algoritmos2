@@ -35,5 +35,6 @@ void main()
 	avl->Insertar(19);
 	
 	avl->Imprimir();
+	cout << avl->Maximo() << endl;
 	//avl->Borrar(x1);
 }

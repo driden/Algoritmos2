@@ -136,7 +136,7 @@ void AVLImp<T>::SetComparador(const Puntero<Comparador<T>> &cmp){
 // retorna true si el árbol es vacío
 template<class T>
 bool AVLImp<T>::EsVacio() const{
-	return false;
+	return _root == NULL;
 }
 
 template<class T>
@@ -146,9 +146,16 @@ const T& AVLImp<T>::Raiz() const{
 
 template<class T>
 const T& AVLImp<T>::Maximo() const {
-	return Raiz();
+	return Maximo(_root);
 }
-
+template<class T>
+const T& AVLImp<T>::Maximo(Puntero<NodoAVL<T>> root) const{
+	
+	while (root->GetDer() != NULL){
+		root = root->GetDer();
+	}
+	return root->GetDato();
+}
 template<class T>
 const T& AVLImp<T>::Minimo() const{
 	return Raiz();
@@ -182,7 +189,7 @@ void AVLImp<T>::postorder(Puntero<NodoAVL<T>> p, int indent = 0)
 		if (indent) {
 			std::cout << std::setw(indent) << ' ';
 		}
-		cout << p->GetDato() << "\n ";
+		cout << p->GetDato() << endl;
 	}
 }
 #endif // !AVLIMP_CPP

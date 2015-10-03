@@ -59,6 +59,7 @@ public:
 	Puntero<Comparador<T>> GetComparador() const;
 	virtual void Imprimir();
 	void postorder(Puntero<NodoAVL<T>> p, int indent = 0);
+	const T& Maximo(Puntero<NodoAVL<T>> root) const;
 };
 #include "AVLImp.cpp"
 #endif
