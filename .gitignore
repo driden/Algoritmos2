@@ -19,6 +19,7 @@ Thumbs.db
 *.pdb
 *.suo
 *.user
+*.opensdf
 [Bb]in
 [Dd]ebug*/
 *.sbr
